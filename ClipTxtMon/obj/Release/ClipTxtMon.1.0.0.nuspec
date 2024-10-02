@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>ClipTxtMon</id>
+    <version>1.0.0</version>
+    <authors>ClipTxtMon</authors>
+    <description>Package Description</description>
+    <repository type="git" />
+    <dependencies>
+      <group targetFramework="net8.0-windows7.0">
+        <dependency id="Serilog" version="4.0.2" exclude="Build,Analyzers" />
+        <dependency id="Serilog.Sinks.Console" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="Serilog.Sinks.File" version="6.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="d:\Clipboard txt monitor\ClipTxtMon\bin\Release\net8.0-windows\ClipTxtMon.runtimeconfig.json" target="lib\net8.0-windows7.0\ClipTxtMon.runtimeconfig.json" />
+    <file src="d:\Clipboard txt monitor\ClipTxtMon\bin\Release\net8.0-windows\ClipTxtMon.dll" target="lib\net8.0-windows7.0\ClipTxtMon.dll" />
+  </files>
+</package>
