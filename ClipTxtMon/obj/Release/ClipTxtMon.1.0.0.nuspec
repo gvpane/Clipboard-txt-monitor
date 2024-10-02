@@ -5,7 +5,7 @@
     <version>1.0.0</version>
     <authors>ClipTxtMon</authors>
     <description>Package Description</description>
-    <repository type="git" />
+    <repository type="git" commit="a6edc3a9689c66203dbb42ab792cd54b833ef11c" />
     <dependencies>
       <group targetFramework="net8.0-windows7.0">
         <dependency id="Serilog" version="4.0.2" exclude="Build,Analyzers" />

@@ -17,3 +17,4 @@ d:\Clipboard txt monitor\ClipTxtMon\obj\Release\net8.0-windows\refint\ClipTxtMon
 d:\Clipboard txt monitor\ClipTxtMon\obj\Release\net8.0-windows\ClipTxtMon.pdb
 d:\Clipboard txt monitor\ClipTxtMon\obj\Release\net8.0-windows\ClipTxtMon.genruntimeconfig.cache
 d:\Clipboard txt monitor\ClipTxtMon\obj\Release\net8.0-windows\ref\ClipTxtMon.dll
+d:\Clipboard txt monitor\ClipTxtMon\obj\Release\net8.0-windows\ClipTxtMon.sourcelink.json

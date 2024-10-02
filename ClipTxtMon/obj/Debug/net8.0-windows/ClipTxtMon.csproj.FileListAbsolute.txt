@@ -11,6 +11,7 @@ d:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\ClipTxtMon.Generate
 d:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\ClipTxtMon.AssemblyInfoInputs.cache
 d:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\ClipTxtMon.AssemblyInfo.cs
 d:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\ClipTxtMon.csproj.CoreCompileInputs.cache
+d:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\ClipTxtMon.sourcelink.json
 d:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\ClipTxtMon.csproj.Up2Date
 d:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\ClipTxtMon.dll
 d:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\refint\ClipTxtMon.dll

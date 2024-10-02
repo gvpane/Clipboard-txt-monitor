@@ -11,7 +11,7 @@ class Program
     {
         // Configure Serilog for logging
         Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug() // Set the minimum logging level
+            .MinimumLevel.Information() // Set the minimum logging level
             .WriteTo.Console() // Log to the console
             .WriteTo.File("logs\\clipboard_monitor.log", rollingInterval: RollingInterval.Day) // Log to a file
             .CreateLogger();
@@ -35,7 +35,7 @@ class Program
                         string filePath = fileDropList.Cast<string>().FirstOrDefault();
 
                         // If the file has a .txt extension, process it
-                        if (filePath != null && Path.GetExtension(filePath).Equals("_c_.txt", StringComparison.OrdinalIgnoreCase))
+                        if (filePath != null && Path.GetExtension(filePath).Equals(".ctxt", StringComparison.OrdinalIgnoreCase))
                         {
                             try
                             {
@@ -69,7 +69,7 @@ class Program
                 }
 
                 // Sleep for 5 seconds before checking again (adjust as needed)
-                System.Threading.Thread.Sleep(5000);
+                System.Threading.Thread.Sleep(100);
             }
         }
         catch (Exception ex)
