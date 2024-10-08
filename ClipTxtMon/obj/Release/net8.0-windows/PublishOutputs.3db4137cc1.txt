@@ -1,0 +1,8 @@
+d:\Clipboard txt monitor\ClipTxtMon\bin\Release\net8.0-windows\publish\ClipTxtMon.exe
+d:\Clipboard txt monitor\ClipTxtMon\bin\Release\net8.0-windows\publish\ClipTxtMon.dll
+d:\Clipboard txt monitor\ClipTxtMon\bin\Release\net8.0-windows\publish\ClipTxtMon.deps.json
+d:\Clipboard txt monitor\ClipTxtMon\bin\Release\net8.0-windows\publish\ClipTxtMon.runtimeconfig.json
+d:\Clipboard txt monitor\ClipTxtMon\bin\Release\net8.0-windows\publish\ClipTxtMon.pdb
+d:\Clipboard txt monitor\ClipTxtMon\bin\Release\net8.0-windows\publish\Serilog.dll
+d:\Clipboard txt monitor\ClipTxtMon\bin\Release\net8.0-windows\publish\Serilog.Sinks.Console.dll
+d:\Clipboard txt monitor\ClipTxtMon\bin\Release\net8.0-windows\publish\Serilog.Sinks.File.dll

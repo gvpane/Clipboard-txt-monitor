@@ -9,7 +9,7 @@ class Program
     [STAThread] // Required for clipboard operations
     static void Main(string[] args)
     {
-        // Configure Serilog
+        // Configure Serilog for logging
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Information() // Set the minimum logging level
             .WriteTo.Console() // Log to the console
@@ -28,12 +28,14 @@ class Program
                     // Get the list of files
                     var fileDropList = Clipboard.GetFileDropList();
 
-                    // Check if fileDropList is not null and has files
+                    // Check if fileDropList is not null and contains files
                     if (fileDropList != null && fileDropList.Count > 0)
                     {
-                        // Check if the first file in the list is a .txt file
+                        // Get the first file in the clipboard
                         string filePath = fileDropList.Cast<string>().FirstOrDefault();
-                        if (filePath != null && Path.GetExtension(filePath).Equals(".txt", StringComparison.OrdinalIgnoreCase))
+
+                        // If the file has a .txt extension, process it
+                        if (filePath != null && Path.GetExtension(filePath).Equals(".ctxt", StringComparison.OrdinalIgnoreCase))
                         {
                             try
                             {
@@ -43,7 +45,7 @@ class Program
                                 // Copy the content to the clipboard as text
                                 Clipboard.SetText(fileContent);
 
-                                Log.Information("File contents copied to clipboard successfully: {FilePath}", filePath);
+                                Log.Information("File contents copied to clipboard as text: {FilePath}", filePath);
                             }
                             catch (Exception ex)
                             {
@@ -52,7 +54,8 @@ class Program
                         }
                         else
                         {
-                            Log.Debug("Clipboard does not contain a .txt file.");
+                            // If the file is not a .txt file, keep the original file in the clipboard
+                            Log.Information("Non-.txt file detected, no clipboard modification: {FilePath}", filePath);
                         }
                     }
                     else

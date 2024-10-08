@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {}
+    "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {}
   },
   "projects": {
-    "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {
+    "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
+        "projectUniqueName": "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
         "projectName": "ClipTxtMon",
-        "projectPath": "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
+        "projectPath": "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
         "packagesPath": "C:\\Users\\George-Valentin.Pane\\.nuget\\packages\\",
-        "outputPath": "d:\\Clipboard txt monitor\\ClipTxtMon\\obj\\",
+        "outputPath": "D:\\Clipboard txt monitor\\ClipTxtMon\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
