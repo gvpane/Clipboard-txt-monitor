@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {}
+    "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {}
   },
   "projects": {
-    "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {
+    "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
+        "projectUniqueName": "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
         "projectName": "ClipTxtMon",
-        "projectPath": "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
+        "projectPath": "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
         "packagesPath": "C:\\Users\\George-Valentin.Pane\\.nuget\\packages\\",
-        "outputPath": "d:\\Clipboard txt monitor\\ClipTxtMon\\obj\\",
+        "outputPath": "D:\\Clipboard txt monitor\\ClipTxtMon\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -46,6 +46,12 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "Microsoft.NET.ILLink.Tasks": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.10, )",
+              "autoReferenced": true
+            },
             "Serilog": {
               "target": "Package",
               "version": "[4.0.2, )"
@@ -70,6 +76,20 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[8.0.10, 8.0.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[8.0.10, 8.0.10]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "version": "[8.0.10, 8.0.10]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -79,6 +99,11 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.306/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
         }
       }
     }
