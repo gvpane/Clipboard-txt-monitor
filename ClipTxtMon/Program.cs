@@ -6,6 +6,8 @@ using Serilog;
 
 class Program
 {
+    private static NotifyIcon notifyIcon;
+
     [STAThread] // Required for clipboard operations
     static void Main(string[] args)
     {
@@ -15,6 +17,15 @@ class Program
             .WriteTo.Console() // Log to the console
             .WriteTo.File("logs\\clipboard_monitor.log", rollingInterval: RollingInterval.Day) // Log to a file
             .CreateLogger();
+
+        // Initialize NotifyIcon
+        notifyIcon = new NotifyIcon
+        {
+            Visible = true,
+            Icon = SystemIcons.Success, 
+            BalloonTipIcon = ToolTipIcon.Success,
+            BalloonTipTitle = "Clipboard Monitor"
+        };
 
         try
         {
@@ -32,20 +43,24 @@ class Program
                     if (fileDropList != null && fileDropList.Count > 0)
                     {
                         // Get the first file in the clipboard
-                        string filePath = fileDropList.Cast<string>().FirstOrDefault();
+                        string filePath = fileDropList.Cast<string>().FirstOrDefault() ?? string.Empty;
 
-                        // If the file has a .txt extension, process it
+                        // If the file has a .ctxt extension, process it
                         if (filePath != null && Path.GetExtension(filePath).Equals(".ctxt", StringComparison.OrdinalIgnoreCase))
                         {
                             try
                             {
-                                // Read the contents of the .txt file
+                                // Read the contents of the .ctxt file
                                 string fileContent = File.ReadAllText(filePath);
 
                                 // Copy the content to the clipboard as text
                                 Clipboard.SetText(fileContent);
 
                                 Log.Information("File contents copied to clipboard as text: {FilePath}", filePath);
+
+                                // Show taskbar notification
+                                notifyIcon.BalloonTipText = $"File contents copied to clipboard as text: {filePath}";
+                                notifyIcon.ShowBalloonTip(3000);
                             }
                             catch (Exception ex)
                             {
@@ -54,8 +69,8 @@ class Program
                         }
                         else
                         {
-                            // If the file is not a .txt file, keep the original file in the clipboard
-                            Log.Information("Non-.txt file detected, no clipboard modification: {FilePath}", filePath);
+                            // If the file is not a .ctxt file, keep the original file in the clipboard
+                            Log.Information("Non-.ctxt file detected, no clipboard modification: {FilePath}", filePath);
                         }
                     }
                     else
@@ -68,17 +83,18 @@ class Program
                     Log.Debug("Clipboard does not contain a file.");
                 }
 
-                // Sleep for 5 seconds before checking again (adjust as needed)
-                System.Threading.Thread.Sleep(100);
+                // Sleep for a while before checking again
+                System.Threading.Thread.Sleep(1000);
             }
         }
         catch (Exception ex)
         {
-            Log.Fatal(ex, "An unexpected error occurred.");
+            Log.Fatal(ex, "Clipboard monitor terminated unexpectedly.");
         }
         finally
         {
-            Log.CloseAndFlush(); // Ensure logs are flushed and closed
+            Log.CloseAndFlush();
+            notifyIcon.Dispose(); // Ensure the NotifyIcon is disposed
         }
     }
 }
