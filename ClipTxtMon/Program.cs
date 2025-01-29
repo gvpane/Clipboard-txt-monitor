@@ -11,81 +11,13 @@ class Program
     [STAThread] // Required for clipboard operations
     static void Main(string[] args)
     {
-        // Configure Serilog for logging
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Information() // Set the minimum logging level
-            .WriteTo.Console() // Log to the console
-            .WriteTo.File("logs\\clipboard_monitor.log", rollingInterval: RollingInterval.Day) // Log to a file
-            .CreateLogger();
-
-        // Initialize NotifyIcon
-        notifyIcon = new NotifyIcon
-        {
-            Visible = true,
-            Icon = SystemIcons.Success, 
-            BalloonTipIcon = ToolTipIcon.Success,
-            BalloonTipTitle = "Clipboard Monitor"
-        };
+        ConfigureLogging();
+        InitializeNotifyIcon();
 
         try
         {
             Log.Information("Clipboard monitor started.");
-
-            while (true)  // Create a loop to keep checking the clipboard contents
-            {
-                // Check if the clipboard contains files
-                if (Clipboard.ContainsFileDropList())
-                {
-                    // Get the list of files
-                    var fileDropList = Clipboard.GetFileDropList();
-
-                    // Check if fileDropList is not null and contains files
-                    if (fileDropList != null && fileDropList.Count > 0)
-                    {
-                        // Get the first file in the clipboard
-                        string filePath = fileDropList.Cast<string>().FirstOrDefault() ?? string.Empty;
-
-                        // If the file has a .ctxt extension, process it
-                        if (filePath != null && Path.GetExtension(filePath).Equals(".ctxt", StringComparison.OrdinalIgnoreCase))
-                        {
-                            try
-                            {
-                                // Read the contents of the .ctxt file
-                                string fileContent = File.ReadAllText(filePath);
-
-                                // Copy the content to the clipboard as text
-                                Clipboard.SetText(fileContent);
-
-                                Log.Information("File contents copied to clipboard as text: {FilePath}", filePath);
-
-                                // Show taskbar notification
-                                notifyIcon.BalloonTipText = $"File contents copied to clipboard as text: {filePath}";
-                                notifyIcon.ShowBalloonTip(3000);
-                            }
-                            catch (Exception ex)
-                            {
-                                Log.Error(ex, "Error reading file: {FilePath}", filePath);
-                            }
-                        }
-                        else
-                        {
-                            // If the file is not a .ctxt file, keep the original file in the clipboard
-                            Log.Information("Non-.ctxt file detected, no clipboard modification: {FilePath}", filePath);
-                        }
-                    }
-                    else
-                    {
-                        Log.Debug("Clipboard does not contain any files.");
-                    }
-                }
-                else
-                {
-                    Log.Debug("Clipboard does not contain a file.");
-                }
-
-                // Sleep for a while before checking again
-                System.Threading.Thread.Sleep(1000);
-            }
+            MonitorClipboard();
         }
         catch (Exception ex)
         {
@@ -96,5 +28,79 @@ class Program
             Log.CloseAndFlush();
             notifyIcon.Dispose(); // Ensure the NotifyIcon is disposed
         }
+    }
+
+    private static void ConfigureLogging()
+    {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Information() // Set the minimum logging level
+            .WriteTo.Console() // Log to the console
+            .WriteTo.File("logs\\clipboard_monitor.log", rollingInterval: RollingInterval.Day) // Log to a file
+            .CreateLogger();
+    }
+
+    private static void InitializeNotifyIcon()
+    {
+        notifyIcon = new NotifyIcon
+        {
+            Visible = true,
+            Icon = SystemIcons.Information,
+            BalloonTipIcon = ToolTipIcon.Info,
+            BalloonTipTitle = "Clipboard Monitor"
+        };
+    }
+
+    private static void MonitorClipboard()
+    {
+        while (true)  // Create a loop to keep checking the clipboard contents
+        {
+            if (Clipboard.ContainsFileDropList())
+            {
+                var fileDropList = Clipboard.GetFileDropList();
+                if (fileDropList != null && fileDropList.Count > 0)
+                {
+                    string filePath = fileDropList.Cast<string>().FirstOrDefault() ?? string.Empty;
+                    ProcessFile(filePath);
+                }
+                else
+                {
+                    Log.Debug("Clipboard does not contain any files.");
+                }
+            }
+            else
+            {
+                Log.Debug("Clipboard does not contain a file.");
+            }
+
+            System.Threading.Thread.Sleep(1000); // Sleep for a while before checking again
+        }
+    }
+
+    private static void ProcessFile(string filePath)
+    {
+        if (filePath != null && Path.GetExtension(filePath).Equals(".ctxt", StringComparison.OrdinalIgnoreCase))
+        {
+            try
+            {
+                string fileContent = File.ReadAllText(filePath);
+                Clipboard.SetText(fileContent);
+                Log.Information("File contents copied to clipboard as text: {FilePath}", filePath);
+                ShowNotification($"File contents copied to clipboard as text: {filePath}");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error reading file: {FilePath}", filePath);
+            }
+        }
+        else
+        {
+            Log.Information("Non-.ctxt file detected, no clipboard modification: {FilePath}", filePath);
+        }
+    }
+
+    private static void ShowNotification(string message)
+    {
+        notifyIcon.BalloonTipText = message;
+        notifyIcon.ShowBalloonTip(3000);
     }
 }

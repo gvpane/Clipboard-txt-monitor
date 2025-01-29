@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {}
+    "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {}
   },
   "projects": {
-    "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {
+    "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
+        "projectUniqueName": "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
         "projectName": "ClipTxtMon",
-        "projectPath": "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
+        "projectPath": "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
         "packagesPath": "C:\\Users\\George-Valentin.Pane\\.nuget\\packages\\",
-        "outputPath": "D:\\Clipboard txt monitor\\ClipTxtMon\\obj\\",
+        "outputPath": "d:\\Clipboard txt monitor\\ClipTxtMon\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -48,7 +48,7 @@
           "dependencies": {
             "Serilog": {
               "target": "Package",
-              "version": "[4.0.2, )"
+              "version": "[4.2.0, )"
             },
             "Serilog.Sinks.Console": {
               "target": "Package",

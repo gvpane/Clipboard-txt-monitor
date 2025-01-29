@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net8.0-windows7.0": {
-      "Serilog/4.0.2": {
+      "Serilog/4.2.0": {
         "type": "package",
         "compile": {
           "lib/net8.0/Serilog.dll": {
@@ -50,10 +50,10 @@
     }
   },
   "libraries": {
-    "Serilog/4.0.2": {
-      "sha512": "Vehq4uNYtURe/OnHEpWGvMgrvr5Vou7oZLdn3BuEH5FSCeHXDpNJtpzWoqywXsSvCTuiv0I65mZDRnJSeUvisA==",
+    "Serilog/4.2.0": {
+      "sha512": "gmoWVOvKgbME8TYR+gwMf7osROiWAURterc6Rt2dQyX7wtjZYpqFiA/pY6ztjGQKKV62GGCyOcmtP1UKMHgSmA==",
       "type": "package",
-      "path": "serilog/4.0.2",
+      "path": "serilog/4.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -67,9 +67,11 @@
         "lib/net6.0/Serilog.xml",
         "lib/net8.0/Serilog.dll",
         "lib/net8.0/Serilog.xml",
+        "lib/net9.0/Serilog.dll",
+        "lib/net9.0/Serilog.xml",
         "lib/netstandard2.0/Serilog.dll",
         "lib/netstandard2.0/Serilog.xml",
-        "serilog.4.0.2.nupkg.sha512",
+        "serilog.4.2.0.nupkg.sha512",
         "serilog.nuspec"
       ]
     },
@@ -122,7 +124,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
-      "Serilog >= 4.0.2",
+      "Serilog >= 4.2.0",
       "Serilog.Sinks.Console >= 6.0.0",
       "Serilog.Sinks.File >= 6.0.0"
     ]
@@ -134,11 +136,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
+      "projectUniqueName": "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
       "projectName": "ClipTxtMon",
-      "projectPath": "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
+      "projectPath": "d:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
       "packagesPath": "C:\\Users\\George-Valentin.Pane\\.nuget\\packages\\",
-      "outputPath": "D:\\Clipboard txt monitor\\ClipTxtMon\\obj\\",
+      "outputPath": "d:\\Clipboard txt monitor\\ClipTxtMon\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -175,7 +177,7 @@
         "dependencies": {
           "Serilog": {
             "target": "Package",
-            "version": "[4.0.2, )"
+            "version": "[4.2.0, )"
           },
           "Serilog.Sinks.Console": {
             "target": "Package",
