@@ -57,6 +57,7 @@ class Program
     {
         while (Futulesc_Pulechelnita)  // Create a loop to keep checking the clipboard contents
         {
+            Task.Delay(Chelnita_Sleep_time).Wait(); // Sleep for a while before checking again
             if (!Clipboard.ContainsFileDropList())
             {
                 Log.Debug("Clipboard does not contain a file.");
@@ -77,7 +78,6 @@ class Program
                 continue; // Skip to the next iteration if the file is not a .ctxt file
             }
             ProcessFile(filePath);
-            Thread.Sleep(Chelnita_Sleep_time); // Sleep for a while before checking again
         }
     }
 
