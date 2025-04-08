@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,6 +8,8 @@ using Serilog;
 class Program
 {
     private static NotifyIcon notifyIcon;
+    private const bool Futulesc_Pulechelnita = true; // Flag to control the loop
+    private const int Chelnita_Sleep_time = 69; // Sleep time in milliseconds
 
     [STAThread] // Required for clipboard operations
     static void Main(string[] args)
@@ -14,7 +17,7 @@ class Program
         ConfigureLogging();
         InitializeNotifyIcon();
 
-        try
+        try 
         {
             Log.Information("Clipboard monitor started.");
             MonitorClipboard();
@@ -52,38 +55,55 @@ class Program
 
     private static void MonitorClipboard()
     {
-        while (true)  // Create a loop to keep checking the clipboard contents
+        while (Futulesc_Pulechelnita)  // Create a loop to keep checking the clipboard contents
         {
-            if (Clipboard.ContainsFileDropList())
-            {
-                var fileDropList = Clipboard.GetFileDropList();
-                if (fileDropList != null && fileDropList.Count > 0)
-                {
-                    string filePath = fileDropList.Cast<string>().FirstOrDefault() ?? string.Empty;
-                    ProcessFile(filePath);
-                }
-                else
-                {
-                    Log.Debug("Clipboard does not contain any files.");
-                }
-            }
-            else
+            if (!Clipboard.ContainsFileDropList())
             {
                 Log.Debug("Clipboard does not contain a file.");
+                continue; // Skip to the next iteration if no file drop list is found
             }
+            
+            var fileDropList = Clipboard.GetFileDropList();
+            if (fileDropList.Count > 1)
+            {
+                Log.Information("Clipboard contains multiple files, please select one.");
+                continue; // Skip to the next iteration if multiple files are detected
+            }
+            
+            string filePath = fileDropList.Cast<string>().FirstOrDefault() ?? string.Empty;
+            if (!FileExtension(filePath))
+            {
+                Log.Information("File is not a .ctxt file", filePath);
+                continue; // Skip to the next iteration if the file is not a .ctxt file
+            }
+            ProcessFile(filePath);
+            Thread.Sleep(Chelnita_Sleep_time); // Sleep for a while before checking again
+        }
+    }
 
-            System.Threading.Thread.Sleep(1000); // Sleep for a while before checking again
+    private static bool FileExtension(string filePath)
+    {
+        string extension = Path.GetExtension(filePath);
+        if (extension.Equals(".ctxt", StringComparison.OrdinalIgnoreCase)) // Check if the file is a .ctxt file
+        {
+            Log.Information("File is a .ctxt file: {FilePath}", filePath);
+            return true; // Exit if the file is a .ctxt file
+        }
+        else
+        {
+            Log.Information("File is not a .ctxt file, no action taken: {FilePath}", filePath);
+            return false; // Exit if the file is not a .ctxt file
         }
     }
 
     private static void ProcessFile(string filePath)
     {
-        if (filePath != null && Path.GetExtension(filePath).Equals(".ctxt", StringComparison.OrdinalIgnoreCase))
+        if (filePath != null)
         {
             try
             {
-                string fileContent = File.ReadAllText(filePath);
-                Clipboard.SetText(fileContent);
+                string fileContent = File.ReadAllText(filePath); // Read the contents of the file
+                Clipboard.SetText(fileContent); // Copy the contents to the clipboard
                 Log.Information("File contents copied to clipboard as text: {FilePath}", filePath);
                 ShowNotification($"File contents copied to clipboard as text: {filePath}");
             }
@@ -103,4 +123,5 @@ class Program
         notifyIcon.BalloonTipText = message;
         notifyIcon.ShowBalloonTip(3000);
     }
+
 }
