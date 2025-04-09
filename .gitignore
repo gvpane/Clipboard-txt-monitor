@@ -1,6 +1,7 @@
 # Ignore build outputs
 bin/
 obj/
+obj/Debug/net8.0-windows
 
 
 # Ignore user-specific files
