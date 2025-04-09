@@ -7,7 +7,7 @@ using Serilog;
 
 class Program
 {
-    private static NotifyIcon notifyIcon;
+    private static NotifyIcon? notifyIcon;
     private const bool Futulesc_Pulechelnita = true; // Flag to control the loop
     private const int Chelnita_Sleep_time = 69; // Sleep time in milliseconds
 
@@ -29,7 +29,10 @@ class Program
         finally
         {
             Log.CloseAndFlush();
-            notifyIcon.Dispose(); // Ensure the NotifyIcon is disposed
+            if (notifyIcon != null)
+            {
+                notifyIcon.Dispose(); // Ensure the NotifyIcon is disposed
+            }
         }
     }
 
@@ -120,8 +123,15 @@ class Program
 
     private static void ShowNotification(string message)
     {
-        notifyIcon.BalloonTipText = message;
-        notifyIcon.ShowBalloonTip(3000);
+        if (notifyIcon != null)
+        {
+            notifyIcon.BalloonTipText = message;
+            notifyIcon.ShowBalloonTip(3000);
+        }
+        else
+        {
+            Log.Warning("Attempted to show a notification, but notifyIcon is null.");
+        }
     }
 
 }
