@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 using Serilog;
 
 public static class Utils
 {
+    public static readonly object ClipboardLock = new object();
+
     public static bool FileExtension(string filePath)
     {
         string extension = Path.GetExtension(filePath);

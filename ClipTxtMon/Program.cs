@@ -11,8 +11,8 @@ class Program
     [STAThread] // Required for clipboard operations
     static void Main(string[] args)
     {
-        ConfigureLogging();
-        InitializeNotifyIcon();
+        Logger.ConfigureLogging();
+        notifyIcon = NotifyIconHelper.CreateNotifyIcon();
 
         try
         {
@@ -35,25 +35,5 @@ class Program
                 notifyIcon.Dispose(); // Ensure the NotifyIcon is disposed
             }
         }
-    }
-
-    private static void ConfigureLogging()
-    {
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Information() // Set the minimum logging level
-            .WriteTo.Console() // Log to the console
-            .WriteTo.File("logs\\clipboard_monitor.log", rollingInterval: RollingInterval.Day) // Log to a file
-            .CreateLogger();
-    }
-
-    private static void InitializeNotifyIcon()
-    {
-        notifyIcon = new NotifyIcon
-        {
-            Visible = true,
-            Icon = SystemIcons.Information,
-            BalloonTipIcon = ToolTipIcon.Info,
-            BalloonTipTitle = "Clipboard Monitor"
-        };
     }
 }

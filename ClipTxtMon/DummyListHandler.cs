@@ -1,5 +1,4 @@
-using System;
-using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using Serilog;
 
 public static class DummyListHandler
@@ -7,22 +6,26 @@ public static class DummyListHandler
     public static void Run(NotifyIcon? notifyIcon, int sleepTime, bool keepRunning)
     {
         while (keepRunning)
-        {
-            if (Clipboard.ContainsText())
+        {   
+            Task.Delay(sleepTime).Wait();
+            lock (Utils.ClipboardLock)
             {
-                Log.Information("Clipboard contains text...");
-                string myText = Clipboard.GetText(); // Get the text from the clipboard
-
-                if (!Utils.FirstLineHasNinePipes(myText)) // Check if the first line has exactly nine pipes
+                if (Clipboard.ContainsText())
                 {
-                    continue;
+                    Log.Information("Clipboard contains text...");
+                    string myText = Clipboard.GetText(); // Get the text from the clipboard
+                    if (Regex.Matches(myText, @"\b[A-Z0-9]{32}\b").Count() > 1 && Regex.Matches(myText, @"\bDummy\b").Count() > 1)
+                    {
+                        foreach (Match match in Regex.Matches(myText, @"\b[A-Z0-9]{32}\b"))
+                        {
+                            Log.Information("Found UID: {UID}", match.Value);
+                        }
+                    }
+
+                    Utils.ParsePipeSeparatedLines(myText);
+                    Log.Information("Parsed text from clipboard: {Text}", myText);
                 }
-
-                Utils.ParsePipeSeparatedLines(myText);
-                Log.Information("Parsed text from clipboard: {Text}", myText);
             }
-
-            System.Threading.Thread.Sleep(1000); // Sleep to avoid busy loop
         }
     }
 }
