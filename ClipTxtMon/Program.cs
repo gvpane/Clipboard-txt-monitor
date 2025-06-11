@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 using Serilog;
 
@@ -18,10 +19,17 @@ class Program
         {
             Log.Information("Clipboard monitor started.");
 
-            var compoundTask = Task.Run(() => CompoundHandler.Run(notifyIcon, Chelnita_Sleep_time, Futulesc_Pulechelnita));
-            var dummyTask = Task.Run(() => DummyListHandler.Run(notifyIcon, Chelnita_Sleep_time, Futulesc_Pulechelnita));
+            Thread compoundThread = new Thread(() => CompoundHandler.Run(notifyIcon, Chelnita_Sleep_time, Futulesc_Pulechelnita));
+            Thread dummyThread = new Thread(() => DummyListHandler.Run(notifyIcon, Chelnita_Sleep_time, Futulesc_Pulechelnita));
 
-            Task.WaitAll(compoundTask, dummyTask);
+            compoundThread.SetApartmentState(ApartmentState.STA);
+            dummyThread.SetApartmentState(ApartmentState.STA);
+
+            compoundThread.Start();
+            dummyThread.Start();
+
+            compoundThread.Join();
+            dummyThread.Join();
         }
         catch (Exception ex)
         {

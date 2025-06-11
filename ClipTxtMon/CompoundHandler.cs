@@ -4,11 +4,12 @@ public static class CompoundHandler
 {
     public static void Run(NotifyIcon? notifyIcon, int sleepTime, bool keepRunning)
     {
+        Log.Information("CompoundHandler started with sleep time: {SleepTime} ms", sleepTime);
         while (keepRunning)
         {
             Task.Delay(sleepTime).Wait();
             lock (Utils.ClipboardLock)
-            { 
+            {
                 if (!Clipboard.ContainsFileDropList())
                 {
                     Log.Debug("Clipboard does not contain a file.");
