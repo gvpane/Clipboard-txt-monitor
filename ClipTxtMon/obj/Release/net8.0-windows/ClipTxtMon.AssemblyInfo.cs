@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClipTxtMon")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+989437e71dbc5b94f90d70efc3ffa6974bf4f885")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec1a5225b3f3dfa950b74824784479fa09aa6fe2")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClipTxtMon")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClipTxtMon")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
