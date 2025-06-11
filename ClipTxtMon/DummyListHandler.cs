@@ -13,16 +13,14 @@ public static class DummyListHandler
             {
                 if (Clipboard.ContainsText())
                 {
-                    string myText = Clipboard.GetText(); // Get the text from the clipboard
-                    if (Regex.Matches(myText, @"\b[A-Z0-9]{32}\b").Count() > 1 && Regex.Matches(myText, @"\bDummy\b").Count() > 1)
+                    string myText = Clipboard.GetText();
+                    var matches = Regex.Matches(myText, @"\b[A-Z0-9]{32}\b");
+                    if (matches.Count > 1 && Regex.Matches(myText, @"\bDummy\b").Count > 1)
                     {
-                        Log.Information("Clipboard contains multiple UIDs and 'Dummy' text, processing...");
-                        // Process the text to find UIDs
-                        foreach (Match match in Regex.Matches(myText, @"\b[A-Z0-9]{32}\b"))
-                        {
-                            Log.Information("Found UID: {UID}", match.Value);
-                            Clipboard.Clear(); // Clear the clipboard
-                        }
+                        var uids = matches.Cast<Match>().Select(m => m.Value).Distinct().ToList();
+                        string result = Utils.GenerateTemplateForUids(uids);
+                        Clipboard.SetText(result); // Copy the generated template to clipboard
+                        Log.Information("Generated template copied to clipboard:\n{Result}", result);
                     }
                 }
             }

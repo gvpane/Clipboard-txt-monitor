@@ -54,23 +54,40 @@ public static class Utils
         }
     }
 
-    public static List<string[]> ParsePipeSeparatedLines(string multiLineInput)
+public static string GenerateTemplateForUids(IEnumerable<string> uids)
+{
+    var sb = new System.Text.StringBuilder();
+    sb.AppendLine("{");
+    sb.AppendLine("\tcopyNodesToValidate = {");
+    int i = 0;
+    foreach (var uid in uids)
     {
-        var result = new List<string[]>();
-        var lines = multiLineInput.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-
-        foreach (var line in lines)
-        {
-            var elements = line.Split('|').Select(e => e.Trim()).ToArray();
-            result.Add(elements);
-        }
-
-        return result;
+        sb.AppendLine($"\t\t[{i}] = {{");
+        sb.AppendLine("\t\t\ttype = \"native:Constant\",");
+        sb.AppendLine("\t\t\tvalue = {{");
+        sb.AppendLine($"\t\t\t\t#&{uid},");
+        sb.AppendLine("\t\t\t}},");
+        sb.AppendLine("\t\t\tvalueType = \"HC_Entity\",");
+        sb.AppendLine("\t\t}},");
+        i++;
     }
-
-    public static bool FirstLineHasNinePipes(string input)
+    sb.AppendLine("\t},");
+    sb.AppendLine("\tnodesById = {");
+    i = 0;
+    foreach (var uid in uids)
     {
-        var firstLine = input.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? "";
-        return firstLine.Count(c => c == '|') == 9;
+        sb.AppendLine($"\t\t[{i}] = {{");
+        sb.AppendLine("\t\t\ttype = \"native:Constant\",");
+        sb.AppendLine("\t\t\tvalue = {{");
+        sb.AppendLine($"\t\t\t\t#&{uid},");
+        sb.AppendLine("\t\t\t}},");
+        sb.AppendLine("\t\t\tvalueType = \"HC_Entity\",");
+        sb.AppendLine("\t\t}},");
+        i++;
     }
+    sb.AppendLine("\t},");
+    sb.AppendLine("}");
+    return sb.ToString();
+}
+
 }
