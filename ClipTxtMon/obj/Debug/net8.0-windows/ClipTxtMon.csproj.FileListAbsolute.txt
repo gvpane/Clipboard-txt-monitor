@@ -18,3 +18,5 @@ D:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\refint\ClipTxtMon.d
 D:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\ClipTxtMon.pdb
 D:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\ClipTxtMon.genruntimeconfig.cache
 D:\Clipboard txt monitor\ClipTxtMon\obj\Debug\net8.0-windows\ref\ClipTxtMon.dll
+D:\Clipboard txt monitor\ClipTxtMon\bin\Debug\net8.0-windows\constanttemplatefile
+D:\Clipboard txt monitor\ClipTxtMon\bin\Debug\net8.0-windows\elementtemplatefile

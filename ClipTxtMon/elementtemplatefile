@@ -1,7 +1,7 @@
-[{i}] = {
-			type = "native:Constant",
-			value = {
-				#&{uid},
-			},
-			valueType = "HC_Entity",
-		},
+{
+    type = "native:Constant",
+    value = {
+        #&{uid},
+    },
+    valueType = "HC_Entity",
+},

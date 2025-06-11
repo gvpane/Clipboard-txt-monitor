@@ -19,17 +19,12 @@ class Program
         {
             Log.Information("Clipboard monitor started.");
 
-            Thread compoundThread = new Thread(() => CompoundHandler.Run(notifyIcon, Chelnita_Sleep_time, Futulesc_Pulechelnita));
-            Thread dummyThread = new Thread(() => DummyListHandler.Run(notifyIcon, Chelnita_Sleep_time, Futulesc_Pulechelnita));
+            while (Futulesc_Pulechelnita)
+            {
+                DummyListHandler.Run(notifyIcon, Chelnita_Sleep_time);
+                CompoundHandler.Run(notifyIcon, Chelnita_Sleep_time);
+            }
 
-            compoundThread.SetApartmentState(ApartmentState.STA);
-            dummyThread.SetApartmentState(ApartmentState.STA);
-
-            compoundThread.Start();
-            dummyThread.Start();
-
-            compoundThread.Join();
-            dummyThread.Join();
         }
         catch (Exception ex)
         {

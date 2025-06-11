@@ -1,4 +1,5 @@
 {
-	copyNodesToValidate = {{elements}},
-	nodesById = {{elements}},
+	nodesById = {
+		{elements}
+	},
 }
