@@ -6,6 +6,8 @@ public static class DummyListHandler
     public static void Run(NotifyIcon? notifyIcon, int sleepTime, bool keepRunning)
     {   
         Log.Information("DummyListHandler started with sleep time: {SleepTime} ms", sleepTime);
+        string lastResult = null;
+
         while (keepRunning)
         {
             Task.Delay(sleepTime).Wait();
@@ -19,7 +21,13 @@ public static class DummyListHandler
                     {
                         var uids = matches.Cast<Match>().Select(m => m.Value).Distinct().ToList();
                         string result = Utils.GenerateTemplateForUids(uids);
+
+                        // Skip if clipboard already contains the generated result
+                        if (myText == result || result == lastResult)
+                            continue;
+
                         Clipboard.SetText(result); // Copy the generated template to clipboard
+                        lastResult = result;
                         Log.Information("Generated template copied to clipboard:\n{Result}", result);
                     }
                 }

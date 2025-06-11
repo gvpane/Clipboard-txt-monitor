@@ -54,40 +54,26 @@ public static class Utils
         }
     }
 
-public static string GenerateTemplateForUids(IEnumerable<string> uids)
-{
-    var sb = new System.Text.StringBuilder();
-    sb.AppendLine("{");
-    sb.AppendLine("\tcopyNodesToValidate = {");
-    int i = 0;
-    foreach (var uid in uids)
+    public static string GenerateTemplateForUids(IEnumerable<string> uids)
     {
-        sb.AppendLine($"\t\t[{i}] = {{");
-        sb.AppendLine("\t\t\ttype = \"native:Constant\",");
-        sb.AppendLine("\t\t\tvalue = {{");
-        sb.AppendLine($"\t\t\t\t#&{uid},");
-        sb.AppendLine("\t\t\t}},");
-        sb.AppendLine("\t\t\tvalueType = \"HC_Entity\",");
-        sb.AppendLine("\t\t}},");
-        i++;
+        // Read templates from files
+        string outerTemplate = File.ReadAllText("constanttemplatefile");
+        string elementTemplate = File.ReadAllText("elementtemplatefile");
+
+        var elementBlocks = new System.Text.StringBuilder();
+        int i = 0;
+        foreach (var uid in uids)
+        {
+            string block = elementTemplate
+                .Replace("{i}", i.ToString())
+                .Replace("{uid}", uid);
+            elementBlocks.Append(block);
+            i++;
+        }
+
+        // Insert all element blocks into the outer template
+        string result = outerTemplate.Replace("{elements}", elementBlocks.ToString());
+        return result;
     }
-    sb.AppendLine("\t},");
-    sb.AppendLine("\tnodesById = {");
-    i = 0;
-    foreach (var uid in uids)
-    {
-        sb.AppendLine($"\t\t[{i}] = {{");
-        sb.AppendLine("\t\t\ttype = \"native:Constant\",");
-        sb.AppendLine("\t\t\tvalue = {{");
-        sb.AppendLine($"\t\t\t\t#&{uid},");
-        sb.AppendLine("\t\t\t}},");
-        sb.AppendLine("\t\t\tvalueType = \"HC_Entity\",");
-        sb.AppendLine("\t\t}},");
-        i++;
-    }
-    sb.AppendLine("\t},");
-    sb.AppendLine("}");
-    return sb.ToString();
-}
 
 }
