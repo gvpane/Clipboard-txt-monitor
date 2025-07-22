@@ -130,28 +130,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\George-Valentin.Pane\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\george-valentin.pane\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
+      "projectUniqueName": "E:\\Clipboard-txt-monitor\\ClipTxtMon\\ClipTxtMon.csproj",
       "projectName": "ClipTxtMon",
-      "projectPath": "D:\\Clipboard txt monitor\\ClipTxtMon\\ClipTxtMon.csproj",
-      "packagesPath": "C:\\Users\\George-Valentin.Pane\\.nuget\\packages\\",
-      "outputPath": "D:\\Clipboard txt monitor\\ClipTxtMon\\obj\\",
+      "projectPath": "E:\\Clipboard-txt-monitor\\ClipTxtMon\\ClipTxtMon.csproj",
+      "packagesPath": "C:\\Users\\george-valentin.pane\\.nuget\\packages\\",
+      "outputPath": "E:\\Clipboard-txt-monitor\\ClipTxtMon\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\George-Valentin.Pane\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\george-valentin.pane\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0-windows"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -169,7 +172,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -207,7 +211,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.313/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
