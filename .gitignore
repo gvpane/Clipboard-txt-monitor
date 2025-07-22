@@ -12,3 +12,5 @@ obj/Debug/net8.0-windows
 # Ignore lock files and other build artifacts
 project.lock.json
 project.fragment.lock.json
+
+.fake
